@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- The above 3 meta tags must come first in the head; any other head
+         content must come after these tags -->
+<!-- Bootstrap -->
+<link href="{% static 'bower_components/bootstrap/dist/css/bootstrap.min.css' %}"
+	rel="stylesheet">
+<link href="{% static 'bower_components/bootstrap/dist/css/bootstrap-theme.min.css' %}"
+	rel="stylesheet">
+<link href="{% static 'css/mystyles.css' %}" rel="stylesheet">
+<link href="{% static 'bower_components/font-awesome/css/font-awesome.min.css' %}"
+	rel="stylesheet">
+<link href="{% static 'css/bootstrap-social.css' %}" rel="stylesheet">
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+<title>College Finder</title>
+</head>
+
+<body>
+
+	<header class="jumbotron">
+		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed"
+						data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+						aria-controls="navbar">
+						<span class="sr-only">Toggle navigation</span> <span
+							class="icon-bar"></span> <span class="icon-bar"></span> <span
+							class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="home"><img src="{% static 'img/icon2.png' %}"
+						height=30 width=41></a>
+				</div>
+				<div id="navbar" class="navbar-collapse collapse"
+					style="overflow: hidden">
+					<ul class="nav navbar-nav navbar-left">
+						<li class="active"><a href="#"><span
+								class="glyphicon glyphicon-home" aria-hidden="true"></span> Home</a></li>
+
+						<li><a href="about"><span
+								class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+								About</a></li>
+
+						<li class="dropdown"><a href="#" class="dropdown-toggle"
+							data-toggle="dropdown" role="button" aria-haspopup="true"
+							aria-expanded="false"><span
+								class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+								CUTOFF <span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li class="dropdown-header">CET CUTOFF</li>
+								<li><a href="#">Round1</a></li>
+								<li><a href="#">Round2</a></li>
+								<li><a href="#">Round3</a></li>
+
+								<li role="separator" class="divider"></li>
+								<li class="dropdown-header">JEE CUTOFF</li>
+								<li><a href="#">Round1</a></li>
+								<li><a href="#">Round2</a></li>
+								<li><a href="#">Round3</a></li>
+							</ul></li>
+						 <li><a href="contact"><i class="fa fa-envelope-o"></i> Contact</a></li>
+					
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li><a id="loginButton" role="button"> <span
+								class="glyphicon glyphicon-log-in"></span> Login
+						</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<div id="loginModal" class="modal fade" role="dialog">
+			<div class="modal-dialog modal-lg">
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Login</h4>
+					</div>
+					<div class="modal-body">
+						<form class="form-inline" role="form">
+							<div class="form-group">
+								<div class="">
+									<input type="text" class="form-control" id="email" name="email"
+										placeholder="Email">
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="">
+									<input type="text" class="form-control" id="password"
+										name="password" placeholder="Password">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="checkbox-inline"> <input type="checkbox"
+									name="remember" value=""> Remember me
+								</label>
+							</div>
+
+							<div class="form-group ">
+								<button type="submit" class="btn btn-info">
+									<strong>Sign In</strong>
+								</button>
+								<button type="button" class="btn btn-danger"
+									data-dismiss="modal">
+									<strong>Cancel</strong>
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<form action="FindCollege" method = 'post'>
+			{% csrf_token %}
+			<div id="reserveModal" class="modal fade" role="dialog">
+				<div class="modal-dialog modal-lg">
+					<!-- Modal content-->
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title">College Predictor</h4>
+						</div>
+						<div class="modal-body">
+							<form class="form-horizontal" role="form">
+								<div class="form-group">
+									<label class="col-sm-2 control-label">Rank</label>
+									<div class="col-sm-10">
+										<input class="form-control" id="rank"
+											name="rank" placeholder="Enter Rank">
+										
+										<span style="color: red">*</span>
+									</div>
+
+								</div>
+								<div class="form-group">
+									<label  class="col-sm-2 control-label">Select
+										Branch</label>
+									<div class="col-sm-10">
+											<select class="form-control" name = "dbranch">
+											<option selected disabled = "true">----Branch----</option>
+											{% for result in Branch %}
+												<option  >{{result.name}}</option>
+											{% endfor %}
+											</select>
+										<span style="color: red">*</span>
+									</div>
+
+								</div><br>
+								<div class="form-group">
+									<label for="exampleInputEmail2" class="col-sm-2 control-label">Select
+										Category </label>
+									<div class="col-sm-10">
+										<select class="form-control" name = "dcategory">
+											<option selected disabled = "true">----Category----</option>
+											{% for result in Category %}
+												<option  >{{result.name}}</option>
+											{% endfor %}
+										</select>
+										<span style="color: red">*</span>
+									</div>
+									
+								</div><br><br
+								<div class="form-group">
+									<div class="col-sm-offset-2 col-sm-10">
+										<button type="submit" class="btn btn-primary">
+											<strong>Predict Now</strong>
+										</button>
+										<button type="reset" class="btn btn-danger">
+
+											<strong>Reset</strong>
+										</button>
+									</div>
+								</div>
+							</form>
+							<br>
+
+							<div class=" alert-light">
+
+								<strong>officialcollegefinder@gmail.com</strong>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</form>
+		<!-- Main component for a primary marketing message or call to action -->
+
+		<div class="container">
+			<div class="row row-header">
+				<div class="col-xs-12 col-md-8">
+					<h1>College Finder</h1>
+					<p style="padding: 0px;"></p>
+					<p>Find Your Dream College Now...!!!</p>
+				</div>
+				<div class="col-xs-12 col-md-2">
+					<p style="padding: 0px;"></p>
+					<img src="{% static 'img/icon2.png' %}" class="img-responsive  center-block">
+				</div>
+				<div class="col-xs-12 col-md-2" style="margin-top: 50px;">
+					<!--a type="button" class="btn btn-warning btn-block"
+                   data-toggle="tooltip" title="Or Call us at +852 12345678"
+                   data-placement="bottom" href="#reserveform">Reserve table</a -->
+					<a id="reserveButton" role="button" type="button"
+						class="btn btn-warning btn-block">Predict Now</a>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<div class=" container">
+		<div class="row row-content">
+			<div class="col-xs-12">
+				<div id="mycarousel" class="carousel slide" data-ride="carousel">
+					<!-- Indicators -->
+					<ol class="carousel-indicators">
+						<li data-target="#mycarousel" data-slide-to="0" class="active"></li>
+						<li data-target="#mycarousel" data-slide-to="1"></li>
+						<li data-target="#mycarousel" data-slide-to="2"></li>
+						<li data-target="#mycarousel" data-slide-to="3"></li>
+						<li data-target="#mycarousel" data-slide-to="4"></li>
+					</ol>
+					<!-- Wrapper for slides -->
+					<div class="carousel-inner" role="listbox">
+						<div class="item active">
+							<img class="img-responsive" src="{% static 'img/coep1.jpg' %}" width="350"
+								height="200" alt="COEP">
+							<div class="carousel-caption">
+								<h2>COEP</h2>
+								<p>Established in 1854, College of Engineering, Pune (COEP)
+									is a public/ government college that is autonomous in nature.
+									It is one of the oldest colleges in Asia that is aimed at
+									offering quality education in the fields of Engineering and
+									Technology. COEP is recognised by the University Grants
+									Commission (UGC) and accredited by the National Board of
+									Accreditation (NBA).</p>
+							</div>
+						</div>
+						<div class="item">
+							<img class="img-responsive" src="{% static 'img/rscoe1.jpg' %}" width="350"
+								height="200" alt="RSCOE">
+							<div class="carousel-caption">
+								<h2>JSPM'S RSCOE</h2>
+								<p>Rajarshi Shahu College of Engineering is one among the
+									hallmark institutes of pune, established in 2001 with the aim
+									of providing quality technical education and excellence in the
+									ever expanding horizon of technical revolution of 21st century.
+									The institute is becoming an icon in the field of engineering
+									education in the state of Maharashtra. The Institute is
+									approved by the All India Council for Technical Education
+									(AICTE).</p>
+							</div>
+						</div>
+						<div class="item">
+							<img class="img-responsive" src="{% static 'img/pict1.jpg' %}" width="350"
+								height="200" alt="PICT">
+							<div class="carousel-caption">
+								<h2 class="media-heading">PICT</h2>
+								<p>Pune Institute of Computer Technology is a popular
+									private owned institute which is known for its affordable fee
+									structure. The institute was established in 1983 and is
+									affiliated to SPPU, Pune. The institute offers B.E and M.E
+									courses in various fields mainly focusing in the computer
+									science field. The campus of the university is located in Pune,
+									Maharashtra.</p>
+							</div>
+						</div>
+						<div class="item">
+							<img class="img-responsive" src="{% static 'img/mita1.jpg' %}" width="350"
+								height="200" alt="MIT">
+							<div class="carousel-caption">
+								<h2 class="media-heading">MIT Alandi</h2>
+								<p>The MIT Academy of Engineering (MITAOE) was established
+									under the prestigious MIT group of schools in Pune. The college
+									has recently become the third institute in Pune which has been
+									awarded with Academic autonomy by UGC. On top of that,
+									the institute has been accredited with A grade by NAAC and also
+									by NBA for all its programs. The institute offers
+									undergraduate and postgraduate courses in the field of
+									engineering and research.</p>
+							</div>
+						</div>
+						<div class="item">
+							<img class="img-responsive" src="{% static 'img/dypatil1.jfif' %}" width="350"
+								height="200" alt="DYPatil">
+							<div class="carousel-caption">
+								<h2 class="media-heading">D.Y. Patil</h2>
+								<p>D. Y. Patil College of Engineering was established in the
+									year 1984 and is affiliated to SavitriBai Phule Pune
+									University. The College is recognized by DTE and approved by
+									AICTE. It is also accredited Grade A by NAAC. The College
+									offers UG and PG courses in numerous specializations. The
+									admission in these courses is based on Entrance Exams. The
+									college also provides placement opportunities to students.</p>
+							</div>
+						</div>
+					</div>
+					<!-- Controls -->
+					<a class="left carousel-control" href="#mycarousel" role="button"
+						data-slide="prev"> <span
+						class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+						<span class="sr-only">Previous</span>
+					</a> <a class="right carousel-control" href="#mycarousel" role="button"
+						data-slide="next"> <span
+						class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+						<span class="sr-only">Next</span>
+					</a>
+					<div class="btn-group" id="carouselButtons">
+						<button class="btn btn-danger btn-xs" id="carousel-pause">
+							<span class="glyphicon glyphicon-pause" aria-hidden="true"></span>
+						</button>
+						<button class="btn btn-danger btn-xs" id="carousel-play">
+							<span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row row-content">
+			<div class="col-xs-12 col-sm-3 col-sm-push-9">
+				<p style="padding: 20px;"></p>
+				<h3 align=center>Cap Form & Report A.R.C.</h3>
+			</div>
+			<div class="col-xs-12 col-sm-9 col-sm-pull-3">
+				<div class="media">
+					<div class="media-left media-middle">
+						<a href="#"> <img class="media-object img-thumbnail"
+							src="{% static 'img/1-Number-PNG.png' %}" width="120" height="120" alt="Step-1">
+						</a>
+					</div>
+					<div class="media-body">
+						<h2 class="media-heading">Step-1</h2>
+						<p>Very First step is you need to fill the CAP form and report
+							to the Application Recive Center(A.R.C) near you and complete
+							Documentatiion Process. and prepare a College List according to
+							their Cutoffs and the Stream You Desired....... "You Can take
+							Help of Our College Finder to Prepare the College List...</p>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row row-content">
+			<div class="col-xs-12 col-sm-3">
+				<p style="padding: 20px;"></p>
+				<h3 align=center>Round-1</h3>
+			</div>
+			<div class="col-xs-12 col-sm-9">
+				<div class="media-body">
+					<h2>Step-2</h2>
+					<p>Round-1 is the Main and Important Round in entire Admission
+						process.Here you need to fill the college list in a Prioritised
+						way... NOTE: if you happened to get the first college in your
+						college list , then you wont be able to participate in the next
+						round.</p>
+				</div>
+				<div class="media-right media-middle">
+					<a href="#"> <img class="media-object img-thumbnail"
+						src="{% static 'img/2-Number-PNG.png' %}" width="120" height="140" alt="Step-2">
+					</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="row row-content">
+			<div class="col-xs-12 col-sm-3 col-sm-push-9">
+				<p style="padding: 20px;"></p>
+				<h3 align=center>Round-2</h3>
+			</div>
+			<div class="col-xs-12 col-sm-9 col-sm-pull-3">
+				<div class="media">
+					<div class="media-left media-middle">
+						<a href="#"> <img class="media-object img-thumbnail"
+							src="{% static 'img/3-Number-PNG.png' %}" width="120" height="140" alt="step-3">
+						</a>
+					</div>
+					<div class="media-body">
+						<h2 class="media-heading">Step-3</h2>
+						<p>After Round 1 if you still want a better College then you
+							need to attend this round.And this is pre-final CAP round in
+							admission process...</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row row-content">
+			<div class="col-xs-12 col-sm-3">
+				<p style="padding: 20px;"></p>
+				<h3 align=center>
+					Round-3 <br>Last Round
+				</h3>
+			</div>
+			<div class="col-xs-12 col-sm-9">
+				<div class="media-body">
+					<h2>Step-4</h2>
+					<p>After Round 2 if you still think that you deserve a better
+						college then you need to attend this round.And this will be the
+						Final CAP Round in admission process.....</p>
+				</div>
+				<div class="media-right media-middle">
+					<a href="#"> <img class="media-object img-thumbnail"
+						src="{% static 'img/4-Number-PNG.png' %}" width="120" height="120" alt="Step-4">
+					</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="row row-content">
+			<div class="col-xs-12 col-sm-3 col-sm-push-9">
+				<p style="padding: 20px;"></p>
+				<h3 align=center>Report College And confirm Admission</h3>
+			</div>
+			<div class="col-xs-12 col-sm-9 col-sm-pull-3">
+				<div class="media">
+					<div class="media-left media-middle">
+						<a href="#"> <img class="media-object img-thumbnail"
+							src="{% static 'img/5-Number-PNG.png' %}" width="120" height="220" alt="Step-5">
+						</a>
+					</div>
+					<div class="media-body">
+						<h2 class="media-heading">Step-5</h2>
+						<p>This is the Final Step Of Admission Process.In this you
+							need to report the College And confirm your seat At that
+							College.....ALL THE BEST</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<footer class="row-footer">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-5 col-xs-offset-1 col-sm-2 col-sm-offset-1">
+					<h5>Links</h5>
+					<ul class="list-unstyled">
+						<li><a href="home">Home</a></li>
+						<li><a href="about">About</a></li>
+						<li><a href="#">CUTOFF</a></li>
+						<li><a href="contact">Contact</a></li>
+					</ul>
+				</div>
+				<div class="col-xs-6 col-sm-5">
+					<h5>Our Address</h5>
+					<address>
+						JSPM'S RSCOE,Tathawade,Pune<br> <br> <i
+							class="fa fa-envelope"></i>: <a
+							href="mailto:collegefinder@gmail.com">collegefinder@gmail.com</a>
+					</address>
+				</div>
+				<div class="col-xs-12 col-sm-4">
+					<div class="nav navbar-nav" style="padding: 40px 10px;">
+						<a class="btn btn-social-icon btn-google-plus"
+							href="http://google.com/+"><i class="fa fa-google-plus"></i></a>
+						<a class="btn btn-social-icon btn-facebook"
+							href="http://www.facebook.com/profile.php?id="><i
+							class="fa fa-facebook"></i></a> <a
+							class="btn btn-social-icon btn-linkedin"
+							href="http://www.linkedin.com/in/"><i class="fa fa-linkedin"></i></a>
+						<a class="btn btn-social-icon btn-instagram"
+							href="http://instagram.com/"><i class="fa fa-instagram"></i></a>
+					</div>
+				</div>
+				<div class="col-xs-12">
+					<p style="padding: 10px;"></p>
+					<p align=center>Â© Copyright 2020 college Finder</p>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script src="{% static 'bower_components/jquery/dist/jquery.min.js' %}"></script>
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="{% static 'bower_components/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+	<script>
+		$(document).ready(function() {
+			$("#mycarousel").carousel({
+				interval : 2000
+			});
+			$("#carousel-pause").click(function() {
+				$("#mycarousel").carousel('pause');
+			});
+			$("#carousel-play").click(function() {
+				$("#mycarousel").carousel('cycle');
+			});
+			$("#loginButton").click(function() {
+				$("#loginModal").modal("show");
+			})
+			$("#reserveButton").click(function() {
+				$("#reserveModal").modal("show");
+			})
+		});
+	</script>
+</body>
+
+</html>

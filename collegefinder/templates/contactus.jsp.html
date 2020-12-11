@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% block title %}contactus{% endblock %}
+{% block aboutactive %}<li>{% endblock %}
+    {% block contactactive %}
+<li class="active">{% endblock %}
+    {% block body %}
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <ul class="breadcrumb">
+                    <li><a href="home">Home</a>
+                    </li>
+                    <li class="active">Contact Us</li>
+                </ul>
+            </div>
+            <div class="col-xs-12">
+                <h3>Contact Us</h3>
+                <hr>
+            </div>
+        </div>
+
+        <div class="row row-content">
+            <div class="col-xs-12">
+                <h3>Location Information</h3>
+            </div>
+            <div class="col-xs-12 col-sm-4 col-sm-offset-1">
+                <h5>Our Address</h5><br>
+                <address style="font-size: 100%">
+                    JSPM'S Rscoe,Tathawade pune<br> <br>
+                    <i class="fa fa-envelope"></i>:
+                    <a href="mailto:officialcollegefinder@gmail.com">officialcollegefinder@gmail.com</a>
+                </address><br>
+            </div>
+
+            <div class="col-xs-12 col-sm-11 col-sm-offset-1">
+                <div class="btn-group" role="group" aria-label="...">
+
+                    <a type="button" class="btn btn-success" href="mailto:officialcollegefinder@gmail.com"><i
+                            class="fa fa-envelope-o"></i> Email</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="row row-content">
+            <div class="col-xs-12">
+                <h3>Send us your Feedback</h3>
+            </div>
+
+            <form action="feedback" method="post">
+
+                {% csrf_token %}
+                <div class="col-xs-12 col-sm-9">
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label for="firstname" class="col-sm-2 control-label">First Name</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="firstname" name="firstname"
+                                    placeholder="Enter First Name">
+                            </div>
+                        </div><br>
+                        <div class="form-group">
+                            <label for="lastname" class="col-sm-2 control-label">Last Name</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="lastname" name="lastname"
+                                    placeholder="Enter Last Name">
+                            </div>
+                        </div><br>
+                        <div class="form-group">
+                            <label for="telnum" class="col-xs-12 col-sm-2 control-label">Contact No.</label>
+
+                            <div class="col-sm-10">
+                                <input type="number" class="form-control" id="telnum" name="telnum"
+                                    placeholder="Mob. number">
+                            </div>
+                        </div><br>
+                        <div class="form-group">
+                            <label for="emailid" class="col-sm-2 control-label">Email</label>
+                            <div class="col-sm-10">
+                                <input type="email" class="form-control" id="emailid" name="emailid"
+                                    placeholder="Email">
+                            </div>
+                        </div><br><br>
+                        <div class="form-group">
+                            <div class="checkbox col-sm-5 col-sm-offset-2">
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" name="approve" value="">
+                                    <strong>May we contact you?</strong>
+                                </label>
+                            </div>
+
+                        </div><br><br>
+                        <div class="form-group">
+                            <label for="feedback" class="col-sm-2 control-label">Your Feedback</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control" id="feedback" name="feedback" rows="12"></textarea>
+                            </div>
+                        </div><br><br><br>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-primary">Send Feedback</button>
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-xs-12 col-sm-3">
+                    <p style="padding:20px;"></p>
+                </div>
+            </form>
+        </div>
+
+    </div>
+    {% endblock%}

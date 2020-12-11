@@ -1,0 +1,155 @@
+{% extends 'base.html' %}
+{% block title %}aboutus{% endblock %}
+{% block aboutactive %}<li class="active" >{% endblock %}
+{% block contactactive %}<li>{% endblock %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-10">
+            <div class="row">
+                <div class="col-xs-12">
+                    <ol class="breadcrumb">
+                        <li><a href="index.html">Home</a></li>
+                        <li>About Us</li>
+                    </ol>
+                </div>
+                <div class="col-xs-12">
+                    <h3>About Us</h3>
+                    <hr>
+                </div>
+            </div>
+
+            <div id="history" class="row row-content">
+                <div class="col-xs-12 col-sm-6 col-lg-8">
+                    <h2>Why College Finder?</h2>
+                    <p>If you Define Success as getting a Job (whether u like it or not) in good Reputed Company
+					then good College is important to attain that. When the purpose of life is to reach greater 
+					heights in everyones heart and in your Career then good college is definitely not important !!.
+					</p>
+					<p>but still starting your journey with a good College will surely give you an headstart....</p>
+					<p>and We will help you find your dream College.</p>
+                    <div class="well">
+                        <blockquote>
+                            <p>"The Purpose of Education is to Replace an Empty Mind with an Open one."</p>
+                            <footer>Malcolm S. Forbes.
+                            </footer>
+                        </blockquote>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-lg-4">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Facts At a Glance</h3>
+                        </div>
+                        <div class="panel-body">
+                            <dl class="dl-horizontal">
+                                <dt>Streams</dt>
+                                <dd>15</dd>
+                                
+                                <dt>Colleges</dt>
+                                <dd>44</dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="corporate" class="row row-content">
+                <div class="col-xs-12">
+                    <h2>Our Team</h2>
+                    <div class="panel-group" id="accordion"
+                         role="tablist" aria-multiselectable="true">
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingPeter">
+                                <h3 class="panel-title">
+                                    <a role="button" data-toggle="collapse"
+                                       data-parent="#accordion" href="#peter"
+                                       aria-expanded="true" aria-controls="peter">
+                                        Bhushan Dhamankar
+                                        <small>SEB213</small>
+                                    </a>
+                                </h3>
+                            </div>
+                            <div role="tabpanel" class="panel-collapse collapse in"
+                                 id="peter" aria-labelledby="headingPeter">
+                                <div class="panel-body">
+                                    <p>Second Year Information Technology Student at JSPM Rajashri Shahu College of Engineering
+									</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingDanny">
+                                <h3 class="panel-title">
+                                    <a role="button" data-toggle="collapse"
+                                       data-parent="#accordion" href="#danny"
+                                       aria-expanded="true" aria-controls="danny">
+                                        Sairaj Chidrawar
+                                        <small>SEB209</small>
+                                    </a>
+                                </h3>
+                            </div>
+                            <div role="tabpanel" class="panel-collapse collapse"
+                                 id="danny" aria-labelledby="headingDanny">
+                                <div class="panel-body">
+                                    <p>Second Year Information Technology Student at JSPM Rajashri Shahu College of Engineering</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingAgumbe">
+                                <h3 class="panel-title">
+                                    <a role="button" data-toggle="collapse"
+                                       data-parent="#accordion" href="#agumbe"
+                                       aria-expanded="true" aria-controls="agumbe">
+                                        Akshay Chaudhary
+                                        <small>SEB206</small>
+                                    </a>
+                                </h3>
+                            </div>
+                            <div role="tabpanel" class="panel-collapse collapse"
+                                 id="agumbe" aria-labelledby="headingDanny">
+                                <div class="panel-body">
+                                    <p>Second Year Information Technology Student at JSPM Rajashri Shahu College of Engineering</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingAlberto">
+                                <h3 class="panel-title">
+                                    <a role="button" data-toggle="collapse"
+                                       data-parent="#accordion" href="#alberto"
+                                       aria-expanded="true" aria-controls="alberto">
+                                        Rohit Kangule
+                                        <small>SEB222</small>
+                                    </a>
+                                </h3>
+                            </div>
+                            <div role="tabpanel" class="panel-collapse collapse"
+                                 id="alberto" aria-labelledby="headingDanny">
+                                <div class="panel-body">
+                                    <p>Second Year Information Technology Student at JSPM Rajashri Shahu College of Engineering</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                </div>
+                <div>
+                    <p style="padding:20px;"></p>
+                </div>
+            </div>
+            
+        </div>
+        <nav class="hidden-xs col-sm-2" id="myScrollspy">
+            <ul class="nav nav-pills nav-stacked" data-spy="affix" data-offset-top="400">
+                <li><a href="#history">Why?</a></li>
+                <li><a href="#corporate">Our Team</a></li>
+                
+            </ul>
+        </nav>
+    </div>
+</div>
+
+{% endblock %}
